@@ -8,12 +8,14 @@ public class Plant : MonoBehaviour
 
     private float _stateTimer = 0;
     private GameObject _currentModel;
+    private bool _isWatered = false;
 
     private void Start()
     {
         State = PlantState.New;
         UpdateVisual();
         _stateTimer = 0;
+        _isWatered = false;
     }
 
     private void Update()
@@ -24,6 +26,11 @@ public class Plant : MonoBehaviour
         {
             SetState(PlantState.HalfDone);
         }
+    }
+
+    public void WaterPlant()
+    {
+        _isWatered = true;
     }
 
     private void SetState(PlantState state)
