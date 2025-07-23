@@ -10,6 +10,11 @@ public class Plant : MonoBehaviour
     private GameObject _currentModel;
     private bool _isWatered = false;
 
+    public Plant(PlantDataSO plantDataSO)
+    {
+        PlantDataSO = plantDataSO;
+    }
+
     private void Start()
     {
         State = PlantState.New;
@@ -28,9 +33,9 @@ public class Plant : MonoBehaviour
         }
     }
 
-    public void WaterPlant()
+    public void SetWateredState(bool isWatered)
     {
-        _isWatered = true;
+        _isWatered = isWatered;
     }
 
     private void SetState(PlantState state)
