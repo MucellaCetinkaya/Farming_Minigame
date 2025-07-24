@@ -16,22 +16,33 @@ public class FarmManager : MonoBehaviour
 
     public List<FarmCell> Cells = new List<FarmCell>();
 
+    public Vector2Int TestWaterCell = new Vector2Int(0,0);
+
     private void Start()
     {
         Initialize();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            Debug.Log("Key pressed");
+            WaterCell(TestWaterCell);
+        }
+    }
+
     private void Initialize()
     {
-        float width = _column * _cellDistance;
-        float height = _row * _cellDistance;
+        float totalWidth = _column * _cellDistance;
+        float totalHeight = _row * _cellDistance;
 
-        for (int i = 0; i < _column; i++)
+        for (int row = 0; row < _row; row++)
         {
-            for (int j = 0; j < _row; j++)
+            for (int column = 0; column < _column; column++)
             {
-                float x = (i * _cellDistance) - (width / 2f) + (_cellDistance / 2f);
-                float z = (j * _cellDistance) - (height / 2f) + (_cellDistance / 2f);
+                float x = (column * _cellDistance) - (totalWidth / 2f) + (_cellDistance / 2f);
+                float z = (row * _cellDistance) - (totalHeight / 2f) + (_cellDistance / 2f);
 
                 Vector3 cellPosition = new Vector3(
                     transform.position.x + x,
@@ -40,8 +51,10 @@ public class FarmManager : MonoBehaviour
                 );
 
                 GameObject currentCellGameObject = Instantiate(_cell, cellPosition, transform.rotation, transform);
+
                 FarmCell currentCell = currentCellGameObject.AddComponent<FarmCell>();
-                currentCell.SetGridPosition(new Vector2Int(i, j));
+                currentCell.SetGridPosition(new Vector2Int(column, row)); // column is X, row is Y
+
                 currentCell.SetCellColors(_cellDryColor, _cellWetColor);
 
                 if (currentCell != null)
@@ -50,5 +63,29 @@ public class FarmManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void WaterCell(Vector2Int gridPosition)
+    {
+        int index = GetIndex(gridPosition);
+        if(index < 0)
+        {
+            return;
+        }
+
+        Cells[GetIndex(gridPosition)].WaterCell();
+    }
+
+    private int GetIndex(Vector2Int gridPosition)
+    {
+        int x = gridPosition.x;
+        int y = gridPosition.y;
+
+        if (x < 0 || y < 0 || x >= _column || y >= _row)
+        {
+            Debug.Log("Grid Position out of bounds.");
+            return -1;
+        }
+        return x + y * _column;
     }
 }
