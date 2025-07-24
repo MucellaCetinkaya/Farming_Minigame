@@ -41,7 +41,15 @@ public class FarmCell : MonoBehaviour
         if (_isOccupied && _currentPlant != null)
         {
             _currentPlant.SetWateredState(true);
+        }
+    }
 
+    public void DryCell()
+    {
+        _renderer.material.color = _dryColor;
+        if (_isOccupied && _currentPlant != null)
+        {
+            _currentPlant.SetWateredState(false);
         }
     }
 

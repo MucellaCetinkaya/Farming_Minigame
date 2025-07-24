@@ -1173,10 +1173,12 @@ MonoBehaviour:
   _column: 3
   _cellDistance: 1.2
   _cell: {fileID: 6593808064959512366, guid: a6e443527068e704da38dd73759fa96e, type: 3}
-  _cellDryColor: {r: 0.6377357, g: 0.3760824, b: 0.18650752, a: 0}
+  _cellDryColor: {r: 0.4509804, g: 0.34509805, b: 0.23137255, a: 0}
   _cellWetColor: {r: 0.3433962, g: 0.2169396, b: 0.12634383, a: 1}
   _cellSpawnYOffset: 0.02
+  _cellWetDuration: 3
   Cells: []
+  TestWaterCell: {x: 1, y: 2}
 --- !u!1 &811640133
 GameObject:
   m_ObjectHideFlags: 0

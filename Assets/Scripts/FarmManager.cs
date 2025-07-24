@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +9,13 @@ public class FarmManager : MonoBehaviour
 
     [SerializeField] private float _cellDistance = 1.2f;
 
-    [SerializeField] private GameObject _cell; //Prefab of cell
+    [SerializeField] private GameObject _cell; // Prefab of cell
 
     [SerializeField] private Color _cellDryColor;
     [SerializeField] private Color _cellWetColor;
     [SerializeField] private float _cellSpawnYOffset = 0.02f; // Offset to avoid clipping;
+
+    [SerializeField] private float _cellWetDuration = 5f; // How long a cell remains wet when watered;
 
     public List<FarmCell> Cells = new List<FarmCell>();
 
@@ -27,7 +30,6 @@ public class FarmManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.W))
         {
-            Debug.Log("Key pressed");
             WaterCell(TestWaterCell);
         }
     }
@@ -72,8 +74,21 @@ public class FarmManager : MonoBehaviour
         {
             return;
         }
+        StartCoroutine(WaterCellCoroutine(index));
+    }
 
-        Cells[GetIndex(gridPosition)].WaterCell();
+    private IEnumerator WaterCellCoroutine(int index)
+    {
+        float timer = 0f;
+        Cells[index].WaterCell();
+
+        while( timer < _cellWetDuration)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        Cells[index].DryCell();
     }
 
     private int GetIndex(Vector2Int gridPosition)
