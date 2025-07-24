@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class FarmCell : MonoBehaviour
@@ -10,12 +11,15 @@ public class FarmCell : MonoBehaviour
     private Renderer _renderer;
     private Color _dryColor;
     private Color _wetColor;
+    private Color _highlightColor;
+
+    private bool _isSelected = false;
 
     //public FarmCell(Vector2Int gridPosition)
     //{
     //    GridPosition = gridPosition;
     //}
-    
+
     private void Start()
     {
         _isOccupied = false;
@@ -53,14 +57,51 @@ public class FarmCell : MonoBehaviour
         }
     }
 
-    public void SetCellColors(Color dryColor, Color wetColor)
+    public void SetCellColors(Color dryColor, Color wetColor, Color highlightColor)
     {
         _dryColor = dryColor;
         _wetColor = wetColor;
+        _highlightColor = highlightColor;
     }
 
     public void SetGridPosition(Vector2Int gridPosition)
     {
         _gridPosition = gridPosition;
+    }
+
+    public Vector2Int GetGridPosition()
+    {
+        return _gridPosition;
+    }
+    
+    public void HighlightCell()
+    {
+        _renderer.material.color = _highlightColor;
+    }
+
+    public void OnClicked()
+    {
+        FarmManager.Instance.OnCellClicked(this);
+    }
+
+    public void SetSelected(bool selected)
+    {
+        _isSelected = selected;
+        
+
+        if(selected)
+        {
+            Debug.Log($"Cell {_gridPosition} is selected");
+            //HighlightCell();
+        } else
+        {
+            Debug.Log($"Cell {_gridPosition} is unselected");
+            //DryCell();
+        }
+    }
+
+    public bool IsSelected()
+    {
+        return _isSelected;
     }
 }

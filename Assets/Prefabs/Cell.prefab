@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 819018612847125468}
   - component: {fileID: 2247685268721799184}
   - component: {fileID: 4600764749974492750}
-  - component: {fileID: 2158826669797947605}
+  - component: {fileID: 5148545713200463784}
+  - component: {fileID: 2747429306596420753}
   m_Layer: 0
   m_Name: Cell
   m_TagString: Untagged
@@ -87,8 +88,23 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2158826669797947605
-MeshCollider:
+--- !u!114 &5148545713200463784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593808064959512366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a98ecde164fe54d874f92d3168edd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gridPosition: {x: 0, y: 0}
+  _currentPlant: {fileID: 0}
+  _isOccupied: 0
+--- !u!65 &2747429306596420753
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,7 +121,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  serializedVersion: 3
+  m_Size: {x: 10, y: 0.5, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}

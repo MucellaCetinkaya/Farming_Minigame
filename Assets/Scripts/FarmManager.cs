@@ -10,16 +10,34 @@ public class FarmManager : MonoBehaviour
     [SerializeField] private float _cellDistance = 1.2f;
 
     [SerializeField] private GameObject _cell; // Prefab of cell
+    [SerializeField] private GameObject _highlightPrefab; // Prefab of highlight mesh
 
     [SerializeField] private Color _cellDryColor;
     [SerializeField] private Color _cellWetColor;
+    [SerializeField] private Color _highlightColor;
     [SerializeField] private float _cellSpawnYOffset = 0.02f; // Offset to avoid clipping;
 
     [SerializeField] private float _cellWetDuration = 5f; // How long a cell remains wet when watered;
 
     public List<FarmCell> Cells = new List<FarmCell>();
 
-    public Vector2Int TestWaterCell = new Vector2Int(0,0);
+    private FarmCell _currentlySelectedCell = null;
+    private GameObject _currentHighlight = null;
+
+    //public Vector2Int TestWaterCell = new Vector2Int(0,0);
+
+    public static FarmManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -28,10 +46,7 @@ public class FarmManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-            WaterCell(TestWaterCell);
-        }
+
     }
 
     private void Initialize()
@@ -54,10 +69,11 @@ public class FarmManager : MonoBehaviour
 
                 GameObject currentCellGameObject = Instantiate(_cell, cellPosition, transform.rotation, transform);
 
-                FarmCell currentCell = currentCellGameObject.AddComponent<FarmCell>();
+                //FarmCell currentCell = currentCellGameObject.AddComponent<FarmCell>();
+                FarmCell currentCell = currentCellGameObject.GetComponent<FarmCell>();
                 currentCell.SetGridPosition(new Vector2Int(column, row)); // column is X, row is Y
 
-                currentCell.SetCellColors(_cellDryColor, _cellWetColor);
+                currentCell.SetCellColors(_cellDryColor, _cellWetColor, _highlightColor);
 
                 if (currentCell != null)
                 {
@@ -65,6 +81,9 @@ public class FarmManager : MonoBehaviour
                 }
             }
         }
+
+        _currentHighlight = Instantiate(_highlightPrefab, transform);
+        _currentHighlight.SetActive(false);
     }
 
     public void WaterCell(Vector2Int gridPosition)
@@ -89,6 +108,30 @@ public class FarmManager : MonoBehaviour
         }
 
         Cells[index].DryCell();
+    }
+
+    public void OnCellClicked(FarmCell cell)
+    {
+        Debug.Log($"FarmManager received click on cell: {cell.GetGridPosition()}");
+        if(_currentlySelectedCell != null)
+        {
+            _currentlySelectedCell.SetSelected(false);
+        }
+        _currentlySelectedCell = cell;
+        _currentlySelectedCell?.SetSelected(true);
+
+        _currentHighlight.SetActive(true);
+        Vector3 cellPosition = cell.transform.position;
+        _currentHighlight.transform.position = new Vector3(cellPosition.x, cellPosition.y + _cellSpawnYOffset, cellPosition.z);
+    }
+
+    public void ClearSelection()
+    {
+        if (_currentlySelectedCell != null)
+        {
+            _currentlySelectedCell.SetSelected(false);
+        }
+        _currentHighlight.SetActive(false);
     }
 
     private int GetIndex(Vector2Int gridPosition)
