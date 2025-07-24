@@ -18,6 +18,6 @@ MonoBehaviour:
   NewToHalfDoneDuration: 10
   HalfDoneToDoneDuration: 20
   DoneToDeathDuration: 30
-  NewStagePrefab: {fileID: 0}
-  HalfDoneStagePrefab: {fileID: 0}
-  DoneStagePrefab: {fileID: 0}
+  NewStagePrefab: {fileID: 8160065495227716886, guid: cfd445df6cdf6084baf0f31074f89778, type: 3}
+  HalfDoneStagePrefab: {fileID: 3035531782035758689, guid: e563d884555159244bdaea506c65a849, type: 3}
+  DoneStagePrefab: {fileID: 1240234950985804730, guid: 7387f06e25dec10449e0ee1da1cb2677, type: 3}

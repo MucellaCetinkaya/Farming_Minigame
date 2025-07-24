@@ -24,6 +24,8 @@ public class FarmManager : MonoBehaviour
     private FarmCell _currentlySelectedCell = null;
     private GameObject _currentHighlight = null;
 
+    private FarmInteractionState _interactionState = FarmInteractionState.Plant;
+
     //public Vector2Int TestWaterCell = new Vector2Int(0,0);
 
     public static FarmManager Instance { get; private set; }
@@ -69,9 +71,8 @@ public class FarmManager : MonoBehaviour
 
                 GameObject currentCellGameObject = Instantiate(_cell, cellPosition, transform.rotation, transform);
 
-                //FarmCell currentCell = currentCellGameObject.AddComponent<FarmCell>();
                 FarmCell currentCell = currentCellGameObject.GetComponent<FarmCell>();
-                currentCell.SetGridPosition(new Vector2Int(column, row)); // column is X, row is Y
+                currentCell.SetGridPosition(new Vector2Int(column, row));
 
                 currentCell.SetCellColors(_cellDryColor, _cellWetColor, _highlightColor);
 
@@ -94,6 +95,15 @@ public class FarmManager : MonoBehaviour
             return;
         }
         StartCoroutine(WaterCellCoroutine(index));
+    }
+
+    public void WaterCurrentlySelectedCell()
+    {
+        if (_currentlySelectedCell != null)
+        {
+            Vector2Int gridPosition = _currentlySelectedCell.GetGridPosition();
+            WaterCell(gridPosition);
+        }
     }
 
     private IEnumerator WaterCellCoroutine(int index)
@@ -134,6 +144,11 @@ public class FarmManager : MonoBehaviour
         _currentHighlight.SetActive(false);
     }
 
+    public void SetFarmInteractionState(FarmInteractionState state)
+    {
+        _interactionState = state;
+    }
+
     private int GetIndex(Vector2Int gridPosition)
     {
         int x = gridPosition.x;
@@ -146,4 +161,11 @@ public class FarmManager : MonoBehaviour
         }
         return x + y * _column;
     }
+}
+
+public enum FarmInteractionState
+{
+    Plant,
+    Water,
+    Harvest
 }
