@@ -7,6 +7,7 @@ public class FarmCell : MonoBehaviour
     [SerializeField] private Plant _currentPlant;
     [SerializeField] private bool _isOccupied;
     [SerializeField] private PlantProgressIcon _progressIcon;
+    [SerializeField] private ParticleSystem _particleSystem;
 
     private Vector3 SpawnOffset = new Vector3(0, 0.01f, 0); // Small offset to avoid crop mesh clipping
     private Renderer _renderer;
@@ -15,11 +16,6 @@ public class FarmCell : MonoBehaviour
     private Color _highlightColor;
 
     private bool _isSelected = false;
-
-    //public FarmCell(Vector2Int gridPosition)
-    //{
-    //    GridPosition = gridPosition;
-    //}
 
     private void Start()
     {
@@ -50,9 +46,6 @@ public class FarmCell : MonoBehaviour
         _progressIcon.gameObject.SetActive(true);
         _progressIcon.SetPlantState(PlantState.New);
         _progressIcon.SetMeterValue(0f);
-
-        //GameManager.Instance.AddNewCrop(plant.GetPlantData());
-        //UIManager.Instance.UpdateCropStats();
 
         return true;
     }
@@ -152,8 +145,18 @@ public class FarmCell : MonoBehaviour
         }
     }
 
+    public void PlayParticleEffect()
+    {
+        _particleSystem.Play();
+    }
+
     public bool IsSelected()
     {
         return _isSelected;
+    }
+
+    public bool IsOccupied()
+    {
+        return _isOccupied;
     }
 }

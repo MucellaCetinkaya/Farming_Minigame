@@ -3,7 +3,7 @@ using UnityEngine;
 public class Plant : MonoBehaviour
 {
     private PlantDataSO _plantDataSO;
-    //private FarmCell _farmCell;
+    private FarmCell _farmCell;
 
     public PlantState State { get; private set; }
 
@@ -66,6 +66,10 @@ public class Plant : MonoBehaviour
         }
 
         UIManager.Instance.UpdateCropStats();
+        if(_farmCell != null)
+        {
+            _farmCell.PlayParticleEffect();
+        }
     }
 
     private void UpdateVisual()
@@ -130,7 +134,7 @@ public class Plant : MonoBehaviour
 
     public void SetFarmCell(FarmCell farmCell)
     {
-            //_farmCell = farmCell;
+            _farmCell = farmCell;
     }
 
     public bool CanHarvest()

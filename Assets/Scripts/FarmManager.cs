@@ -122,6 +122,8 @@ public class FarmManager : MonoBehaviour
     {
         if (_currentlySelectedCell != null)
         {
+            if(_currentlySelectedCell.IsOccupied()) { return; }
+
             if(GameManager.Instance.GetMoney() < plantDataSO.Cost)
             {
                 return;
@@ -136,11 +138,9 @@ public class FarmManager : MonoBehaviour
             plantGO.AddComponent<Plant>();
             Plant plant = plantGO.GetComponent<Plant>();
             plant.SetPlantData(plantDataSO);
-            //plant.SetFarmCell(_currentlySelectedCell);
+            plant.SetFarmCell(_currentlySelectedCell);
             _currentlySelectedCell.PlantCrop(plant);
 
-            //CropStat currentCropStat = GameManager.Instance.GetCropStat(plantDataSO);
-            //currentCropStat.NewCount += 1;
 
         }
     }
