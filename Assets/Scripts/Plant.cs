@@ -3,6 +3,7 @@ using UnityEngine;
 public class Plant : MonoBehaviour
 {
     private PlantDataSO _plantDataSO;
+    private FarmCell _farmCell;
 
     public PlantState State { get; private set; }
 
@@ -44,9 +45,15 @@ public class Plant : MonoBehaviour
 
     private void SetState(PlantState state)
     {
+        if(state == State)
+        {
+            return;
+        }
+
         State = state;
         _stateTimer = 0;
         UpdateVisual();
+        //_farmCell.SetProgressIconState(state);
     }
 
     private void UpdateVisual()
@@ -102,6 +109,11 @@ public class Plant : MonoBehaviour
         float normalizedVal = _stateTimer/ stateDuration;
         
         return Mathf.Clamp01(normalizedVal);
+    }
+
+    public void SetFarmCell(FarmCell farmCell)
+    {
+            _farmCell = farmCell;
     }
 }
 

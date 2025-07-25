@@ -127,6 +127,7 @@ public class FarmManager : MonoBehaviour
             plantGO.AddComponent<Plant>();
             Plant plant = plantGO.GetComponent<Plant>();
             plant.SetPlantData(plantDataSO);
+            plant.SetFarmCell(_currentlySelectedCell);
             _currentlySelectedCell.PlantCrop(plant);
         }
     }

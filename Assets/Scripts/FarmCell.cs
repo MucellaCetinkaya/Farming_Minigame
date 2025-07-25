@@ -6,6 +6,7 @@ public class FarmCell : MonoBehaviour
     [SerializeField] private Vector2Int _gridPosition; // (column, row)
     [SerializeField] private Plant _currentPlant;
     [SerializeField] private bool _isOccupied;
+    [SerializeField] private PlantProgressIcon _progressIcon;
 
     private Vector3 SpawnOffset = new Vector3(0, 0.01f, 0); // Small offset to avoid crop mesh clipping
     private Renderer _renderer;
@@ -25,6 +26,15 @@ public class FarmCell : MonoBehaviour
         _isOccupied = false;
         _currentPlant = null;
         _renderer = GetComponent<Renderer>();
+        _progressIcon.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if(_isOccupied && _currentPlant != null)
+        {
+            _progressIcon.SetMeterValue(_currentPlant.GetStateTimerNormalized());
+        }
     }
 
     public bool PlantCrop(Plant plant)
@@ -36,6 +46,11 @@ public class FarmCell : MonoBehaviour
         _currentPlant.transform.SetParent(transform);
 
         _isOccupied = true;
+
+        _progressIcon.gameObject.SetActive(true);
+        _progressIcon.SetPlantState(PlantState.New);
+        _progressIcon.SetMeterValue(0f);
+
         return true;
     }
 
@@ -97,6 +112,14 @@ public class FarmCell : MonoBehaviour
         {
             Debug.Log($"Cell {_gridPosition} is unselected");
             //DryCell();
+        }
+    }
+
+    public void SetProgressIconState(PlantState plantState)
+    {
+        if(_progressIcon != null)
+        {
+            _progressIcon.SetPlantState(plantState);
         }
     }
 
