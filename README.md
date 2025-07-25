@@ -3,6 +3,8 @@
 <img src="images/plant panel.png" width="40%">
 Press "Plant", "Water" and "Harvest" tabs to switch between interaction modes
 <br>
+<br>
+<br>
 <img src="images/water panel.png" width="40%">
 Press on farm cell to select it. Then press on any interaction button in their corresponding panel to perform the interaction.
 <br>
