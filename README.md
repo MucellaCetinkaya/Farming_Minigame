@@ -1,9 +1,11 @@
 # Farming_Minigame
 
-<img src="images/plant panel.png" width="100%">
-Press "Plant", "Water" and "Harvest" buttons to switch between interaction modes
+<img src="images/plant panel.png" width="40%">
+Press "Plant", "Water" and "Harvest" tabs to switch between interaction modes
 <br>
-
+<img src="images/water panel.png" width="40%">
+Press on farm cell to select it. Then press on any interaction button in their corresponding panel to perform the interaction.
+<br>
 
 ## Downloaded Assets and Packages
 [Farm Game UI](https://assetstore.unity.com/packages/2d/gui/farm-game-ui-starter-2d-318607) 
