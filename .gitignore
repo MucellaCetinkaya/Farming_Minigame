@@ -57,7 +57,7 @@ sysinfo.txt
 
 # Builds
 *.apk
-!build/Farming Minigame.apk
+!build/Farming_Minigame.apk
 *.aab
 *.unitypackage
 *.app
