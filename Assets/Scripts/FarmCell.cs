@@ -51,6 +51,9 @@ public class FarmCell : MonoBehaviour
         _progressIcon.SetPlantState(PlantState.New);
         _progressIcon.SetMeterValue(0f);
 
+        //GameManager.Instance.AddNewCrop(plant.GetPlantData());
+        //UIManager.Instance.UpdateCropStats();
+
         return true;
     }
 
@@ -87,6 +90,10 @@ public class FarmCell : MonoBehaviour
     {
         if(CanHarvest())
         {
+            GameManager.Instance.RemoveDoneCrop(_currentPlant.GetPlantData());
+            UIManager.Instance.UpdateCropStats();
+
+
             _currentPlant.HarvestPlant();
             Destroy(_currentPlant);
             _isOccupied = false;

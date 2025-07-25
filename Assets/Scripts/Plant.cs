@@ -19,6 +19,9 @@ public class Plant : MonoBehaviour
     private void Start()
     {
         State = PlantState.New;
+        GameManager.Instance.AddNewCrop(_plantDataSO);
+        UIManager.Instance.UpdateCropStats();
+
         UpdateVisual();
         _stateTimer = 0;
         _isWatered = false;
@@ -53,7 +56,16 @@ public class Plant : MonoBehaviour
         State = state;
         _stateTimer = 0;
         UpdateVisual();
-        //_farmCell.SetProgressIconState(state);
+        
+        if(state== PlantState.HalfDone)
+        {
+            GameManager.Instance.AddHalfDoneCrop(_plantDataSO);
+        } else if(state== PlantState.Done)
+        {
+            GameManager.Instance.AddDoneCrop(_plantDataSO);
+        }
+
+        UIManager.Instance.UpdateCropStats();
     }
 
     private void UpdateVisual()
@@ -87,6 +99,11 @@ public class Plant : MonoBehaviour
     public void SetPlantData(PlantDataSO plantData)
     {
         _plantDataSO = plantData;
+    }
+
+    public PlantDataSO GetPlantData()
+    {
+        return _plantDataSO;
     }
 
     public float GetStateTimerNormalized()

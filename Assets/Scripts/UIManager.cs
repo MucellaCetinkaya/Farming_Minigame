@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _tomatoCostText;
     [SerializeField] private TextMeshProUGUI _tomatoValueText;
 
+    [SerializeField] private List<PanelCropStat> _cropStatList;
+
     private GameObject _activePanel;
     private PlantDataSO _currentPlantDataSO;
 
@@ -32,6 +34,7 @@ public class UIManager : MonoBehaviour
         }
 
         Instance = this;
+        //_cropStatList = new List<PanelCropStat>();
     }
 
     private void Start()
@@ -99,6 +102,20 @@ public class UIManager : MonoBehaviour
         _cornValueText.text = _cornDataSO.Value.ToString();
         _tomatoCostText.text = _tomatoDataSO.Cost.ToString();
         _tomatoValueText.text = _tomatoDataSO.Value.ToString();
+    }
+
+    public void UpdateCropStats()
+    {
+        foreach(var cropStat in GameManager.Instance.CropStats)
+        {
+            foreach(var panelCropStat in _cropStatList)
+            {
+                if(cropStat.PlantData == panelCropStat.GetPlantDataSO())
+                {
+                    panelCropStat.UpdatePanel(cropStat);
+                }
+            }
+        }
     }
 
     public void SetFarmInteractionStatePlant()

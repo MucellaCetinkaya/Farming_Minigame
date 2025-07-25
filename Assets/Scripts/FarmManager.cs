@@ -138,6 +138,10 @@ public class FarmManager : MonoBehaviour
             plant.SetPlantData(plantDataSO);
             //plant.SetFarmCell(_currentlySelectedCell);
             _currentlySelectedCell.PlantCrop(plant);
+
+            //CropStat currentCropStat = GameManager.Instance.GetCropStat(plantDataSO);
+            //currentCropStat.NewCount += 1;
+
         }
     }
 
@@ -151,7 +155,7 @@ public class FarmManager : MonoBehaviour
 
     public void OnCellClicked(FarmCell cell)
     {
-        Debug.Log($"FarmManager received click on cell: {cell.GetGridPosition()}");
+        //Debug.Log($"FarmManager received click on cell: {cell.GetGridPosition()}");
         if(_currentlySelectedCell != null)
         {
             _currentlySelectedCell.SetSelected(false);
