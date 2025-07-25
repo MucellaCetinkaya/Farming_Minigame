@@ -4,6 +4,8 @@ using UnityEngine;
 public class PlantDataSO : ScriptableObject
 {
     public string PlantName;
+    public Texture2D Icon; //Must be a sprite
+
     public float Cost;
     public float Value;
     

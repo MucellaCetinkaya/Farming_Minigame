@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FarmManager : MonoBehaviour
 {
     [SerializeField] private int _row = 4;
     [SerializeField] private int _column = 3;
-
     [SerializeField] private float _cellDistance = 1.2f;
 
     [SerializeField] private GameObject _cell; // Prefab of cell
@@ -15,9 +15,9 @@ public class FarmManager : MonoBehaviour
     [SerializeField] private Color _cellDryColor;
     [SerializeField] private Color _cellWetColor;
     [SerializeField] private Color _highlightColor;
+    
     [SerializeField] private float _cellSpawnYOffset = 0.02f; // Offset to avoid clipping;
-
-    [SerializeField] private float _cellWetDuration = 5f; // How long a cell remains wet when watered;
+    [SerializeField] private float _cellWetDuration = 10f; // How long a cell remains wet when watered;
 
     public List<FarmCell> Cells = new List<FarmCell>();
 
@@ -25,8 +25,6 @@ public class FarmManager : MonoBehaviour
     private GameObject _currentHighlight = null;
 
     private FarmInteractionState _interactionState = FarmInteractionState.Plant;
-
-    //public Vector2Int TestWaterCell = new Vector2Int(0,0);
 
     public static FarmManager Instance { get; private set; }
 
@@ -118,6 +116,19 @@ public class FarmManager : MonoBehaviour
         }
 
         Cells[index].DryCell();
+    }
+
+    public void PlantCrop(PlantDataSO plantDataSO)
+    {
+        if (_currentlySelectedCell != null)
+        {
+            Vector2Int gridPosition = _currentlySelectedCell.GetGridPosition();
+            GameObject plantGO = new GameObject();
+            plantGO.AddComponent<Plant>();
+            Plant plant = plantGO.GetComponent<Plant>();
+            plant.SetPlantData(plantDataSO);
+            _currentlySelectedCell.PlantCrop(plant);
+        }
     }
 
     public void OnCellClicked(FarmCell cell)

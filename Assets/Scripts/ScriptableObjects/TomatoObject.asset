@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TomatoObject
   m_EditorClassIdentifier: 
   PlantName: Tomato
+  Icon: {fileID: 2800000, guid: 143c114f544409340bde7ffd4d926562, type: 3}
   Cost: 10
   Value: 25
   NewToHalfDoneDuration: 10

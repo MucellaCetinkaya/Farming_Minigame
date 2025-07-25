@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Plant : MonoBehaviour
 {
-    public PlantDataSO PlantDataSO;
+    private PlantDataSO _plantDataSO;
 
     public PlantState State { get; private set; }
 
@@ -12,7 +12,7 @@ public class Plant : MonoBehaviour
 
     public Plant(PlantDataSO plantDataSO)
     {
-        PlantDataSO = plantDataSO;
+        _plantDataSO = plantDataSO;
     }
 
     private void Start()
@@ -27,9 +27,13 @@ public class Plant : MonoBehaviour
     {
         _stateTimer += Time.deltaTime;
 
-        if(State == PlantState.New && _stateTimer >= PlantDataSO.NewToHalfDoneDuration)
+        if(State == PlantState.New && _stateTimer >= _plantDataSO.NewToHalfDoneDuration)
         {
             SetState(PlantState.HalfDone);
+        }
+        if(State == PlantState.HalfDone && _stateTimer >= _plantDataSO.HalfDoneToDoneDuration && _isWatered)
+        {
+            SetState(PlantState.Done);
         }
     }
 
@@ -56,20 +60,48 @@ public class Plant : MonoBehaviour
         switch (State)
         {
             case PlantState.New:
-                newModel = PlantDataSO.NewStagePrefab;
+                newModel = _plantDataSO.NewStagePrefab;
                 break;
             case PlantState.HalfDone:
-                newModel = PlantDataSO.HalfDoneStagePrefab; 
+                newModel = _plantDataSO.HalfDoneStagePrefab; 
                 break;
             case PlantState.Done:
-                newModel = PlantDataSO.DoneStagePrefab;
+                newModel = _plantDataSO.DoneStagePrefab;
                 break;
         }
 
         if(newModel != null)
         {
             _currentModel = Instantiate(newModel, transform.position, transform.rotation);
+            _currentModel.transform.SetParent(transform);
         }
+    }
+    
+    public void SetPlantData(PlantDataSO plantData)
+    {
+        _plantDataSO = plantData;
+    }
+
+    public float GetStateTimerNormalized()
+    {
+        float stateDuration = 0.0f;
+
+        switch (State)
+        {
+            case PlantState.New:
+                stateDuration = _plantDataSO.NewToHalfDoneDuration;
+                break;
+             case PlantState.HalfDone:
+                stateDuration = _plantDataSO.HalfDoneToDoneDuration;
+                break;
+             case PlantState.Done:
+                stateDuration = _plantDataSO.DoneToDeathDuration;
+                break;
+        }
+
+        float normalizedVal = _stateTimer/ stateDuration;
+        
+        return Mathf.Clamp01(normalizedVal);
     }
 }
 

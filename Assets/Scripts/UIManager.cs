@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _harvestPanel;
 
     private GameObject _activePanel;
+    private PlantDataSO _currentPlantDataSO;
 
     public static UIManager Instance { get; private set; }
 
@@ -56,6 +57,18 @@ public class UIManager : MonoBehaviour
     public void WaterCell()
     {
         FarmManager.Instance.WaterCurrentlySelectedCell();
+    }
+
+    public void SelectCropTypeToBuy(PlantDataSO plantDataSO) {
+        _currentPlantDataSO = plantDataSO;
+    }
+
+    public void BuyAndPlantCrop()
+    {
+        if (_currentPlantDataSO != null)
+        {
+            FarmManager.Instance.PlantCrop(_currentPlantDataSO);
+        }
     }
 
     public void SetFarmInteractionStatePlant()
