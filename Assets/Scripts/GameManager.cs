@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _maxMoney = 10000;
 
     public List<CropStat> CropStats;
+    public CharacterController Gardener;
+    public CharacterController Harvester;
 
     public static GameManager Instance { get; private set; }
 

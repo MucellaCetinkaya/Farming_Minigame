@@ -104,6 +104,12 @@ public class FarmManager : MonoBehaviour
         }
     }
 
+
+    public void SendGardenerToWaterCurrentCell()
+    {
+        GameManager.Instance.Gardener.WaterCell(_currentlySelectedCell.GetGridPosition(), _currentlySelectedCell.gameObject.transform);
+    }
+
     private IEnumerator WaterCellCoroutine(int index)
     {
         float timer = 0f;

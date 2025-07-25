@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class UIManager : MonoBehaviour
 {
@@ -72,6 +73,11 @@ public class UIManager : MonoBehaviour
     public void WaterCell()
     {
         FarmManager.Instance.WaterCurrentlySelectedCell();
+    }
+
+    public void SendGardenerToWaterCell()
+    {
+        FarmManager.Instance.SendGardenerToWaterCurrentCell();
     }
 
     public void SelectCropTypeToBuy(PlantDataSO plantDataSO) {
