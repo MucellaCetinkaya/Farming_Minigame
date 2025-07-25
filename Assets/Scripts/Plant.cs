@@ -3,7 +3,7 @@ using UnityEngine;
 public class Plant : MonoBehaviour
 {
     private PlantDataSO _plantDataSO;
-    private FarmCell _farmCell;
+    //private FarmCell _farmCell;
 
     public PlantState State { get; private set; }
 
@@ -113,7 +113,28 @@ public class Plant : MonoBehaviour
 
     public void SetFarmCell(FarmCell farmCell)
     {
-            _farmCell = farmCell;
+            //_farmCell = farmCell;
+    }
+
+    public bool CanHarvest()
+    {
+        bool result = false;
+
+        if(_currentModel != null && 
+            State == PlantState.Done) {
+        result = true;
+        }
+
+        return result;
+    }
+
+    public void HarvestPlant()
+    {
+        if (_currentModel != null)
+        {
+            Destroy(_currentModel);
+            GameManager.Instance.UpdateMoney(_plantDataSO.Value);
+        }
     }
 }
 

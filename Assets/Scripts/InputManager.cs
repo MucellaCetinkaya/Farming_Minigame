@@ -40,7 +40,7 @@ public class InputManager : MonoBehaviour
                 cell.OnClicked();
             } else
             {
-                FarmManager.Instance.ClearSelection();
+                //FarmManager.Instance.ClearSelection();
             }
         }
     }

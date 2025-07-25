@@ -6,8 +6,8 @@ public class PlantDataSO : ScriptableObject
     public string PlantName;
     public Texture2D Icon; //Must be a sprite
 
-    public float Cost;
-    public float Value;
+    public int Cost;
+    public int Value;
     
     public float NewToHalfDoneDuration;
     public float HalfDoneToDoneDuration;

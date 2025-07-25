@@ -122,13 +122,30 @@ public class FarmManager : MonoBehaviour
     {
         if (_currentlySelectedCell != null)
         {
+            if(GameManager.Instance.GetMoney() < plantDataSO.Cost)
+            {
+                return;
+            } else
+            {
+                GameManager.Instance.UpdateMoney(-plantDataSO.Cost);
+            }
+
+
             Vector2Int gridPosition = _currentlySelectedCell.GetGridPosition();
             GameObject plantGO = new GameObject();
             plantGO.AddComponent<Plant>();
             Plant plant = plantGO.GetComponent<Plant>();
             plant.SetPlantData(plantDataSO);
-            plant.SetFarmCell(_currentlySelectedCell);
+            //plant.SetFarmCell(_currentlySelectedCell);
             _currentlySelectedCell.PlantCrop(plant);
+        }
+    }
+
+    public void HarvestCrop()
+    {
+        if (_currentlySelectedCell != null)
+        {
+            _currentlySelectedCell.Harvest();
         }
     }
 

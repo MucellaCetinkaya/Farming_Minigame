@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -7,6 +8,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _plantPanel;
     [SerializeField] private GameObject _waterPanel;
     [SerializeField] private GameObject _harvestPanel;
+
+    [SerializeField] private TextMeshProUGUI _moneyText;
+
+    [SerializeField] private PlantDataSO _cornDataSO;
+    [SerializeField] private PlantDataSO _tomatoDataSO;
+    [SerializeField] private TextMeshProUGUI _cornCostText;
+    [SerializeField] private TextMeshProUGUI _cornValueText;
+    [SerializeField] private TextMeshProUGUI _tomatoCostText;
+    [SerializeField] private TextMeshProUGUI _tomatoValueText;
 
     private GameObject _activePanel;
     private PlantDataSO _currentPlantDataSO;
@@ -30,6 +40,8 @@ public class UIManager : MonoBehaviour
         _waterPanel.SetActive(false);
         _harvestPanel.SetActive(false);
         _activePanel = _plantPanel;
+
+        SetCropCostsAndValues();
     }
 
     public void SetFarmInteractionState(FarmInteractionState state)
@@ -69,6 +81,24 @@ public class UIManager : MonoBehaviour
         {
             FarmManager.Instance.PlantCrop(_currentPlantDataSO);
         }
+    }
+
+    public void HarvestCrop()
+    {
+        FarmManager.Instance.HarvestCrop();
+    }
+
+    public void UpdateMoney(int amount)
+    {
+        _moneyText.text = amount.ToString();
+    }
+
+    private void SetCropCostsAndValues()
+    {
+        _cornCostText.text = _cornDataSO.Cost.ToString();
+        _cornValueText.text = _cornDataSO.Value.ToString();
+        _tomatoCostText.text = _tomatoDataSO.Cost.ToString();
+        _tomatoValueText.text = _tomatoDataSO.Value.ToString();
     }
 
     public void SetFarmInteractionStatePlant()

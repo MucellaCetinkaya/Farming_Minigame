@@ -72,6 +72,28 @@ public class FarmCell : MonoBehaviour
         }
     }
 
+    public bool CanHarvest()
+    {
+        bool result = false;
+
+        if(_currentPlant != null && _currentPlant.CanHarvest()) {
+            result = true;
+        }
+
+        return result;
+    }
+
+    public void Harvest()
+    {
+        if(CanHarvest())
+        {
+            _currentPlant.HarvestPlant();
+            Destroy(_currentPlant);
+            _isOccupied = false;
+            _progressIcon.gameObject.SetActive(false);
+        }
+    }
+
     public void SetCellColors(Color dryColor, Color wetColor, Color highlightColor)
     {
         _dryColor = dryColor;

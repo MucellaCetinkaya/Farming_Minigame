@@ -9,6 +9,8 @@ public class PlantProgressIcon : MonoBehaviour
     {
         _renderer = GetComponent<Renderer>();
         _material = _renderer.material;
+
+        SetPlantState(PlantState.New);
     }
 
     public void SetPlantState(PlantState plantState)

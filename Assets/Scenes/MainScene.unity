@@ -4195,6 +4195,7 @@ Transform:
   - {fileID: 771724312}
   - {fileID: 1293097479}
   - {fileID: 1481683885}
+  - {fileID: 1633634993}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
@@ -6880,6 +6881,13 @@ MonoBehaviour:
   _plantPanel: {fileID: 254630397072311064}
   _waterPanel: {fileID: 327649936}
   _harvestPanel: {fileID: 2055805449}
+  _moneyText: {fileID: 1354832626}
+  _cornDataSO: {fileID: 11400000, guid: 69f940339c2ec1a4f9b2baeebeb6293e, type: 2}
+  _tomatoDataSO: {fileID: 11400000, guid: f888d146fc0c0ce4893e617e2117eda1, type: 2}
+  _cornCostText: {fileID: 1566117080}
+  _cornValueText: {fileID: 550212058}
+  _tomatoCostText: {fileID: 504732871}
+  _tomatoValueText: {fileID: 986683378}
 --- !u!4 &1481683885
 Transform:
   m_ObjectHideFlags: 0
@@ -7478,6 +7486,34 @@ PrefabInstance:
       propertyPath: m_SpriteState.m_PressedSprite
       value: 
       objectReference: {fileID: 21300000, guid: de884ed58ee3a92489436863e405750e, type: 3}
+    - target: {fileID: 1563568127790814402, guid: 86fb7408545b84c47869eba4104b40d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563568127790814402, guid: 86fb7408545b84c47869eba4104b40d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563568127790814402, guid: 86fb7408545b84c47869eba4104b40d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1481683884}
+    - target: {fileID: 1563568127790814402, guid: 86fb7408545b84c47869eba4104b40d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563568127790814402, guid: 86fb7408545b84c47869eba4104b40d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HarvestCrop
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563568127790814402, guid: 86fb7408545b84c47869eba4104b40d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563568127790814402, guid: 86fb7408545b84c47869eba4104b40d3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2004043036277410004, guid: 86fb7408545b84c47869eba4104b40d3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -7979,6 +8015,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615786659}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1633634992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1633634993}
+  - component: {fileID: 1633634994}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1633634993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633634992}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 811640134}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1633634994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633634992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c71e6843ba3402f4f9a9a8e536342f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cropTypes: []
+  _money: 50
+  _maxMoney: 10000
 --- !u!1001 &1649459637
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10592,6 +10675,67 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &2826689544543821367
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6710737698004198855, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_Name
+      value: Plant Progress Icon
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710737698004198855, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695435830960090261, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695435830960090261, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.2296999
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695435830960090261, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695435830960090261, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695435830960090261, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695435830960090261, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695435830960090261, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695435830960090261, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695435830960090261, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695435830960090261, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 619145ba187f24e42947fafeb7c4999e, type: 3}
 --- !u!1 &2966161102857100549
 GameObject:
   m_ObjectHideFlags: 0
@@ -11402,3 +11546,4 @@ SceneRoots:
   - {fileID: 811640134}
   - {fileID: 1396066269}
   - {fileID: 766447492}
+  - {fileID: 2826689544543821367}
